@@ -23631,8 +23631,8 @@
 	var Repos = __webpack_require__(200);
 	var UserProfile = __webpack_require__(201);
 	var Notes = __webpack_require__(202);
-	var Firebase = __webpack_require__(203);
-	var ReactFireMixin = __webpack_require__(204);
+	var Firebase = __webpack_require__(204);
+	var ReactFireMixin = __webpack_require__(205);
 
 	var Profile = React.createClass({
 	  displayName: 'Profile',
@@ -23749,6 +23749,7 @@
 	'use strict';
 
 	var React = __webpack_require__(1);
+	var NotesList = __webpack_require__(203);
 
 	var Notes = React.createClass({
 	  displayName: 'Notes',
@@ -23757,14 +23758,14 @@
 	    return React.createElement(
 	      'div',
 	      null,
-	      'Notes ',
-	      React.createElement('br', null),
-	      'Username: ',
-	      this.props.username,
-	      ' ',
-	      React.createElement('br', null),
-	      'Notes: ',
-	      this.props.notes
+	      React.createElement(
+	        'h3',
+	        null,
+	        ' Notes for ',
+	        this.props.username,
+	        ' '
+	      ),
+	      React.createElement(NotesList, { notes: this.props.notes })
 	    );
 	  }
 	});
@@ -23773,6 +23774,37 @@
 
 /***/ },
 /* 203 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var React = __webpack_require__(1);
+
+	var NotesList = React.createClass({
+	  displayName: "NotesList",
+
+	  render: function render() {
+	    var notes = this.props.notes.map(function (note, index) {
+	      return React.createElement(
+	        "li",
+	        { className: "list-group-item", key: index },
+	        " ",
+	        note,
+	        " "
+	      );
+	    });
+	    return React.createElement(
+	      "ul",
+	      { className: "list-group" },
+	      notes
+	    );
+	  }
+	});
+
+	module.exports = NotesList;
+
+/***/ },
+/* 204 */
 /***/ function(module, exports) {
 
 	/*! @license Firebase v2.2.7
@@ -24042,7 +24074,7 @@
 
 
 /***/ },
-/* 204 */
+/* 205 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
