@@ -4,9 +4,9 @@ var Repos = React.createClass({
   render: function() {
     return (
       <div>
-        UserProfile <br />
+        Repos <br />
         Username: {this.props.username} <br />
-        Bio: {this.props.bio}
+        Repos: {this.props.repos}
       </div>
     )
   }

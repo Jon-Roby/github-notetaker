@@ -3,9 +3,11 @@ var Router = require('react-router');
 var Repos = require('./Github/Repos');
 var UserProfile = require('./Github/UserProfile');
 var Notes = require('./Notes/Notes');
+var Firebase = require('firebase');
+var ReactFireMixin = require('reactfire');
 
 var Profile = React.createClass({
-  mixins: [Router.State],
+  mixins: [Router.State, ReactFireMixin],
 
   getInitialState: function() {
     return {
@@ -14,6 +16,16 @@ var Profile = React.createClass({
       repos: [],
       notes: []
     }
+  },
+
+  componentDidMount: function() {
+    this.ref = new Firebase('https://blistering-torch-1584.firebaseio.com/'); //this is the roote
+    var childRef = this.ref.child(this.getParams().username); // child is a Firebase thing. It g
+    this.bindAsArray(childRef, 'notes'); //This takes the info from the url and adds it to notes
+  },
+
+  componentWillUnmount: function() {
+    this.unbind('notes');
   },
 
   render: function() {
